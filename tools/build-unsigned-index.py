@@ -37,9 +37,16 @@ def main() -> None:
         entry = {key: manifest[key] for key in required}
         entry["id"] = connector_id
         entry["releaseNotes"] = manifest.get("releaseNotes", "")
+        sha = hashlib.sha256(raw).hexdigest()
+        # Immutable release path (mirrors the signed repo layout): each version gets a
+        # sha256-named copy so a new version always has a fresh URL — no stale-CDN
+        # checksum mismatches on install.
+        release_dir = root / "connectors" / connector_id / "releases" / sha
+        release_dir.mkdir(parents=True, exist_ok=True)
+        (release_dir / "connector.json").write_bytes(raw)
         entry["manifest"] = {
-            "path": f"connectors/{connector_id}/connector.json",
-            "sha256": hashlib.sha256(raw).hexdigest(),
+            "path": f"connectors/{connector_id}/releases/{sha}/connector.json",
+            "sha256": sha,
         }
         entries.append(entry)
 

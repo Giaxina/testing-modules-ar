@@ -3,7 +3,7 @@
   "repositoryID": "mio-feed-aroki",
   "name": "Mio Feed AROKI",
   "enabled": true,
-  "generatedAt": 1789768719,
+  "generatedAt": 1789768978,
   "connectors": [
     {
       "familyID": "animeunity-browse",
@@ -18,7 +18,7 @@
       "id": "animeunity-browse",
       "releaseNotes": "0.1.2: fix native-validation rejection — streams final extract fields are strict (model keys only); the variant marker moved from a custom 'filemark' field onto qualityLabel (free-form model field) via the same SUB_ITA->SUB / ITA->DUB transform chain, and the where filter now tests qualityLabel. Gating semantics unchanged: wrong-variant requests yield no candidate, never a substitution.",
       "manifest": {
-        "path": "connectors/animeunity-browse/connector.json",
+        "path": "connectors/animeunity-browse/releases/ce28cbee52cefd15c213446e97f9d4da16f06f1c0d5329ae71b3f31b395f685e/connector.json",
         "sha256": "ce28cbee52cefd15c213446e97f9d4da16f06f1c0d5329ae71b3f31b395f685e"
       }
     }
