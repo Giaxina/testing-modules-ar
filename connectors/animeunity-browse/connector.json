@@ -1,0 +1,363 @@
+{
+  "schemaVersion": 1,
+  "id": "animeunity-browse",
+  "familyID": "animeunity-browse",
+  "name": "AnimeUnity",
+  "version": "0.2.0",
+  "minimumAppVersion": "0.1.0",
+  "contentType": "video",
+  "language": "it",
+  "contentRating": "unknown",
+  "releaseTrack": "beta",
+  "status": "active",
+  "attribution": {
+    "author": "Community candidate (unverified)",
+    "website": "https://www.animeunity.so"
+  },
+  "authorization": {
+    "basis": "personal",
+    "note": "Candidato di test non verificato: lo stato dei diritti dei contenuti non è stato accertato. Usare solo contenuti a cui si ha diritto di accesso; nessun diritto di distribuzione è fornito. Non pubblicare senza verifica del maintainer.",
+    "evidenceURL": "https://www.animeunity.so/"
+  },
+  "allowedHosts": [
+    "www.animeunity.so",
+    "vixcloud.co",
+    "*.vix-content.net",
+    "img.animeunity.so",
+    "img.animeworld.ac",
+    "*.anilist.co",
+    "*.myanimelist.net"
+  ],
+  "capabilities": [
+    "discovery",
+    "search",
+    "details",
+    "episodes",
+    "streams"
+  ],
+  "limits": {
+    "timeoutMilliseconds": 15000,
+    "maxConcurrentRequests": 2,
+    "maxResponseBytes": 4194304
+  },
+  "operations": {
+    "discovery": {
+      "sections": [
+        {
+          "id": "latest",
+          "title": "Ultimi aggiornamenti",
+          "semantic": "recent",
+          "request": {
+            "method": "GET",
+            "urlTemplate": "https://www.animeunity.so/?page={page}",
+            "headers": {
+              "Accept": "text/html",
+              "Referer": "https://www.animeunity.so/"
+            }
+          },
+          "response": {
+            "format": "html"
+          },
+          "pagination": {
+            "type": "pageParam",
+            "start": 1,
+            "maxPages": 2
+          },
+          "items": {
+            "collection": "div.latest-anime-container",
+            "fields": {
+              "sourceID": {
+                "selector": "a[href*=\"/anime/\"]",
+                "part": "attr",
+                "attr": "href",
+                "transforms": [
+                  {
+                    "op": "removePrefix",
+                    "value": "https://www.animeunity.so/anime/"
+                  },
+                  {
+                    "op": "firstInteger"
+                  }
+                ]
+              },
+              "title": {
+                "selector": "strong.latest-anime-title",
+                "part": "text",
+                "transforms": [
+                  {
+                    "op": "trim"
+                  }
+                ]
+              },
+              "posterURL": {
+                "selector": "img",
+                "part": "attr",
+                "attr": "src"
+              }
+            }
+          }
+        },
+        {
+          "id": "archive",
+          "title": "Archivio",
+          "semantic": "all",
+          "request": {
+            "method": "GET",
+            "urlTemplate": "https://www.animeunity.so/archivio",
+            "headers": {
+              "Accept": "text/html",
+              "Referer": "https://www.animeunity.so/"
+            }
+          },
+          "response": {
+            "format": "html-attr-json",
+            "selector": "archivio",
+            "attribute": "records"
+          },
+          "pagination": {
+            "type": "none"
+          },
+          "items": {
+            "collection": "[*]",
+            "fields": {
+              "sourceID": {
+                "path": "id"
+              },
+              "title": {
+                "path": "title_eng",
+                "fallbacks": [
+                  {
+                    "path": "title"
+                  }
+                ]
+              },
+              "posterURL": {
+                "path": "imageurl"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "search": {
+      "request": {
+        "method": "GET",
+        "urlTemplate": "https://www.animeunity.so/archivio?title={query}",
+        "headers": {
+          "Accept": "text/html",
+          "Referer": "https://www.animeunity.so/"
+        }
+      },
+      "response": {
+        "format": "html-attr-json",
+        "selector": "archivio",
+        "attribute": "records"
+      },
+      "items": {
+        "collection": "[*]",
+        "fields": {
+          "sourceID": {
+            "path": "id"
+          },
+          "title": {
+            "path": "title_eng",
+            "fallbacks": [
+              {
+                "path": "title"
+              }
+            ]
+          },
+          "posterURL": {
+            "path": "imageurl"
+          }
+        }
+      }
+    },
+    "details": {
+      "request": {
+        "method": "GET",
+        "urlTemplate": "https://www.animeunity.so/anime/{titleID}-0",
+        "headers": {
+          "Accept": "text/html",
+          "Referer": "https://www.animeunity.so/"
+        }
+      },
+      "response": {
+        "format": "html-attr-json",
+        "selector": "video-player",
+        "attribute": "anime"
+      },
+      "extract": {
+        "title": {
+          "path": "title_eng",
+          "fallbacks": [
+            {
+              "path": "title"
+            },
+            {
+              "path": "title_it"
+            }
+          ]
+        },
+        "synopsis": {
+          "path": "plot"
+        },
+        "posterURL": {
+          "path": "imageurl"
+        },
+        "year": {
+          "path": "date"
+        },
+        "genres": {
+          "collection": "genres[*].name"
+        }
+      }
+    },
+    "episodes": {
+      "request": {
+        "method": "GET",
+        "urlTemplate": "https://www.animeunity.so/info_api/{titleID}/1?start_range=1&end_range=120",
+        "headers": {
+          "Accept": "application/json",
+          "Referer": "https://www.animeunity.so/"
+        }
+      },
+      "response": {
+        "format": "json"
+      },
+      "extract": {
+        "collection": "episodes[*]",
+        "fields": {
+          "episodeID": {
+            "path": "id"
+          },
+          "title": {
+            "path": "file_name",
+            "transforms": [
+              {
+                "op": "removeBracketedSegments"
+              },
+              {
+                "op": "trim"
+              }
+            ]
+          },
+          "episodeNumber": {
+            "path": "number",
+            "transforms": [
+              {
+                "op": "firstInteger"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "streams": {
+      "variants": [
+        "sub",
+        "dub"
+      ],
+      "steps": [
+        {
+          "request": {
+            "method": "GET",
+            "urlTemplate": "https://www.animeunity.so/embed-url/{episodeID}",
+            "headers": {
+              "Referer": "https://www.animeunity.so/"
+            }
+          },
+          "response": {
+            "format": "html"
+          },
+          "extract": {
+            "context": {
+              "embedURL": {
+                "kind": "url",
+                "selector": "body",
+                "part": "text",
+                "transforms": [
+                  {
+                    "op": "trim"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "request": {
+            "method": "GET",
+            "follow": "embedURL",
+            "headers": {
+              "Referer": "https://www.animeunity.so/"
+            }
+          },
+          "response": {
+            "format": "html"
+          },
+          "extract": {
+            "collection": {
+              "selector": "script:contains(window.downloadUrl)",
+              "where": [
+                {
+                  "field": "filemark",
+                  "containsPlaceholder": "variant"
+                }
+              ]
+            },
+            "fields": {
+              "url": {
+                "selector": "script:contains(window.downloadUrl)",
+                "part": "text",
+                "transforms": [
+                  {
+                    "op": "trim"
+                  },
+                  {
+                    "op": "removePrefix",
+                    "value": "window.downloadUrl = '"
+                  },
+                  {
+                    "op": "removeSuffix",
+                    "value": "'"
+                  }
+                ]
+              },
+              "filemark": {
+                "selector": "script:contains(window.downloadUrl)",
+                "part": "text",
+                "transforms": [
+                  {
+                    "op": "trim"
+                  },
+                  {
+                    "op": "removePrefix",
+                    "value": "window.downloadUrl = '"
+                  },
+                  {
+                    "op": "replaceFirst",
+                    "find": "SUB_ITA",
+                    "with": "SUB"
+                  },
+                  {
+                    "op": "replaceFirst",
+                    "find": "ITA",
+                    "with": "DUB"
+                  }
+                ]
+              },
+              "qualityLabel": {
+                "literal": "1080p"
+              },
+              "mediaTypeHint": {
+                "literal": "mp4"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "releaseNotes": "0.2.0: aggiunti gli streams (grafo dichiarativo /embed-url/{episodeID} -> pagina embed VixCloud -> MP4 diretto da window.downloadUrl, gating sub/dub via marcatori di filename SUB_ITA/ITA, mai sostituzioni di lingua) e la discovery (home + archivio). Limiti noti: episodes restituisce i primi 120 episodi (info_api rifiuta range >120); titoli senza scws_id falliscono onestamente (noPlayableStream); la pagina embed VixCloud e il testo grezzo di /embed-url richiedono la validazione nativa del maintainer."
+}
