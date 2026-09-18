@@ -3,7 +3,7 @@
   "repositoryID": "mio-feed-aroki",
   "name": "Mio Feed AROKI",
   "enabled": true,
-  "generatedAt": 1789770390,
+  "generatedAt": 1789771523,
   "connectors": [
     {
       "familyID": "animeunity-browse",
@@ -20,6 +20,23 @@
       "manifest": {
         "path": "connectors/animeunity-browse/releases/4ff985344740415f50232c17621261978345650cd7f8b8a7d1f290d3c44cc377/connector.json",
         "sha256": "4ff985344740415f50232c17621261978345650cd7f8b8a7d1f290d3c44cc377"
+      }
+    },
+    {
+      "familyID": "animeworld-browse",
+      "name": "AnimeWorld",
+      "version": "0.1.0",
+      "contentType": "video",
+      "language": "it",
+      "contentRating": "unknown",
+      "releaseTrack": "beta",
+      "status": "active",
+      "minimumAppVersion": "0.1.0",
+      "id": "animeworld-browse",
+      "releaseNotes": "Candidato 0.1.0: discovery (newest + updated), search, details, episodes e streams in un solo passo dichiarativo - la pagina player di AnimeWorld (/api/episode/serverPlayerAnimeWorld?id={episodeID}) è HTML server-rendered con <source src> = MP4 diretto su *.sweetpixel.org. Gating sub/dub via marcatori di filename SUB_ITA/ITA sulla qualityLabel (mai sostituzioni di lingua). Tutti gli episodi sono server-rendered sulla pagina titolo (anche serie da 1000+ episodi).",
+      "manifest": {
+        "path": "connectors/animeworld-browse/releases/5bd1a4e229c36c8be20a7499d1fc55e2fc227fec829ecb606babe46f7a0b1b2b/connector.json",
+        "sha256": "5bd1a4e229c36c8be20a7499d1fc55e2fc227fec829ecb606babe46f7a0b1b2b"
       }
     }
   ]

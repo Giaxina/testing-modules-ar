@@ -1,0 +1,321 @@
+{
+  "schemaVersion": 1,
+  "id": "animeworld-browse",
+  "familyID": "animeworld-browse",
+  "name": "AnimeWorld",
+  "version": "0.1.0",
+  "minimumAppVersion": "0.1.0",
+  "contentType": "video",
+  "language": "it",
+  "contentRating": "unknown",
+  "releaseTrack": "beta",
+  "status": "active",
+  "attribution": {
+    "author": "Community candidate (unverified)",
+    "website": "https://www.animeworld.ac"
+  },
+  "authorization": {
+    "basis": "personal",
+    "note": "Candidato di test non verificato: lo stato dei diritti dei contenuti non è stato accertato. Usare solo contenuti a cui si ha diritto di accesso; nessun diritto di distribuzione è fornito. Non pubblicare senza verifica del maintainer.",
+    "evidenceURL": "https://www.animeworld.ac/"
+  },
+  "allowedHosts": [
+    "www.animeworld.ac",
+    "img.animeworld.ac",
+    "*.sweetpixel.org"
+  ],
+  "capabilities": [
+    "discovery",
+    "search",
+    "details",
+    "episodes",
+    "streams"
+  ],
+  "limits": {
+    "timeoutMilliseconds": 15000,
+    "maxConcurrentRequests": 2,
+    "maxResponseBytes": 4194304
+  },
+  "operations": {
+    "discovery": {
+      "sections": [
+        {
+          "id": "newest",
+          "title": "Ultime uscite",
+          "semantic": "recent",
+          "request": {
+            "method": "GET",
+            "urlTemplate": "https://www.animeworld.ac/newest",
+            "headers": {
+              "Accept": "text/html",
+              "Referer": "https://www.animeworld.ac/"
+            }
+          },
+          "response": {
+            "format": "html"
+          },
+          "pagination": {
+            "type": "none"
+          },
+          "items": {
+            "collection": "div.film-list div.item",
+            "fields": {
+              "sourceID": {
+                "selector": "a.name",
+                "part": "attr",
+                "attr": "href",
+                "transforms": [
+                  {
+                    "op": "removePrefix",
+                    "value": "/play/"
+                  }
+                ]
+              },
+              "title": {
+                "selector": "a.name",
+                "part": "text",
+                "transforms": [
+                  {
+                    "op": "trim"
+                  }
+                ]
+              },
+              "posterURL": {
+                "selector": "img",
+                "part": "attr",
+                "attr": "src"
+              }
+            }
+          }
+        },
+        {
+          "id": "updated",
+          "title": "Aggiornati",
+          "semantic": "all",
+          "request": {
+            "method": "GET",
+            "urlTemplate": "https://www.animeworld.ac/updated",
+            "headers": {
+              "Accept": "text/html",
+              "Referer": "https://www.animeworld.ac/"
+            }
+          },
+          "response": {
+            "format": "html"
+          },
+          "pagination": {
+            "type": "none"
+          },
+          "items": {
+            "collection": "div.film-list div.item",
+            "fields": {
+              "sourceID": {
+                "selector": "a.name",
+                "part": "attr",
+                "attr": "href",
+                "transforms": [
+                  {
+                    "op": "removePrefix",
+                    "value": "/play/"
+                  }
+                ]
+              },
+              "title": {
+                "selector": "a.name",
+                "part": "text",
+                "transforms": [
+                  {
+                    "op": "trim"
+                  }
+                ]
+              },
+              "posterURL": {
+                "selector": "img",
+                "part": "attr",
+                "attr": "src"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "search": {
+      "request": {
+        "method": "GET",
+        "urlTemplate": "https://www.animeworld.ac/search?keyword={query}",
+        "headers": {
+          "Accept": "text/html",
+          "Referer": "https://www.animeworld.ac/"
+        }
+      },
+      "response": {
+        "format": "html"
+      },
+      "items": {
+        "collection": {
+          "selector": "div.film-list div.item",
+          "where": [
+            {
+              "field": "title",
+              "containsPlaceholder": "query"
+            }
+          ]
+        },
+        "fields": {
+          "sourceID": {
+            "selector": "a.name",
+            "part": "attr",
+            "attr": "href",
+            "transforms": [
+              {
+                "op": "removePrefix",
+                "value": "/play/"
+              }
+            ]
+          },
+          "title": {
+            "selector": "a.name",
+            "part": "text",
+            "transforms": [
+              {
+                "op": "trim"
+              }
+            ]
+          },
+          "posterURL": {
+            "selector": "img",
+            "part": "attr",
+            "attr": "src"
+          }
+        }
+      }
+    },
+    "details": {
+      "request": {
+        "method": "GET",
+        "urlTemplate": "https://www.animeworld.ac/play/{titleID}",
+        "headers": {
+          "Accept": "text/html",
+          "Referer": "https://www.animeworld.ac/"
+        }
+      },
+      "response": {
+        "format": "html"
+      },
+      "extract": {
+        "title": {
+          "selector": "h1.title",
+          "part": "text",
+          "transforms": [
+            {
+              "op": "trim"
+            }
+          ]
+        },
+        "synopsis": {
+          "selector": "meta[name=description]",
+          "part": "attr",
+          "attr": "content"
+        },
+        "posterURL": {
+          "selector": "meta[name=og:image]",
+          "part": "attr",
+          "attr": "content"
+        }
+      }
+    },
+    "episodes": {
+      "request": {
+        "method": "GET",
+        "urlTemplate": "https://www.animeworld.ac/play/{titleID}",
+        "headers": {
+          "Accept": "text/html",
+          "Referer": "https://www.animeworld.ac/"
+        }
+      },
+      "response": {
+        "format": "html"
+      },
+      "extract": {
+        "collection": ".server.active a[data-episode-id]",
+        "fields": {
+          "episodeID": {
+            "selector": "a",
+            "part": "attr",
+            "attr": "data-id"
+          },
+          "episodeNumber": {
+            "selector": "a",
+            "part": "attr",
+            "attr": "data-episode-num",
+            "transforms": [
+              {
+                "op": "firstInteger"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "streams": {
+      "variants": [
+        "sub",
+        "dub"
+      ],
+      "steps": [
+        {
+          "request": {
+            "method": "GET",
+            "urlTemplate": "https://www.animeworld.ac/api/episode/serverPlayerAnimeWorld?id={episodeID}",
+            "headers": {
+              "Accept": "text/html",
+              "Referer": "https://www.animeworld.ac/"
+            }
+          },
+          "response": {
+            "format": "html"
+          },
+          "extract": {
+            "collection": {
+              "selector": "source",
+              "where": [
+                {
+                  "field": "qualityLabel",
+                  "containsPlaceholder": "variant"
+                }
+              ]
+            },
+            "fields": {
+              "url": {
+                "selector": "source",
+                "part": "attr",
+                "attr": "src"
+              },
+              "qualityLabel": {
+                "selector": "source",
+                "part": "attr",
+                "attr": "src",
+                "transforms": [
+                  {
+                    "op": "replaceFirst",
+                    "find": "SUB_ITA",
+                    "with": "SUB"
+                  },
+                  {
+                    "op": "replaceFirst",
+                    "find": "ITA",
+                    "with": "DUB"
+                  }
+                ]
+              },
+              "mediaTypeHint": {
+                "literal": "mp4"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "releaseNotes": "Candidato 0.1.0: discovery (newest + updated), search, details, episodes e streams in un solo passo dichiarativo - la pagina player di AnimeWorld (/api/episode/serverPlayerAnimeWorld?id={episodeID}) è HTML server-rendered con <source src> = MP4 diretto su *.sweetpixel.org. Gating sub/dub via marcatori di filename SUB_ITA/ITA sulla qualityLabel (mai sostituzioni di lingua). Tutti gli episodi sono server-rendered sulla pagina titolo (anche serie da 1000+ episodi)."
+}
