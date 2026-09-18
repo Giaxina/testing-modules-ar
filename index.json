@@ -3,12 +3,12 @@
   "repositoryID": "mio-feed-aroki",
   "name": "Mio Feed AROKI",
   "enabled": true,
-  "generatedAt": 1789768102,
+  "generatedAt": 1789768367,
   "connectors": [
     {
       "familyID": "animeunity-browse",
       "name": "AnimeUnity",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "contentType": "video",
       "language": "it",
       "contentRating": "unknown",
@@ -16,10 +16,10 @@
       "status": "active",
       "minimumAppVersion": "0.1.0",
       "id": "animeunity-browse",
-      "releaseNotes": "0.2.0: aggiunti gli streams (grafo dichiarativo /embed-url/{episodeID} -> pagina embed VixCloud -> MP4 diretto da window.downloadUrl, gating sub/dub via marcatori di filename SUB_ITA/ITA, mai sostituzioni di lingua) e la discovery (home + archivio). Limiti noti: episodes restituisce i primi 120 episodi (info_api rifiuta range >120); titoli senza scws_id falliscono onestamente (noPlayableStream); la pagina embed VixCloud e il testo grezzo di /embed-url richiedono la validazione nativa del maintainer.",
+      "releaseNotes": "0.1.1: fix native-validation rejection — removed details.genres (the JSON path \"genres[*].name\" uses a mid-path [*] wildcard the app rejects; wildcards must be terminal). Title/synopsis/poster/year unchanged.",
       "manifest": {
         "path": "connectors/animeunity-browse/connector.json",
-        "sha256": "935b403fc511b24228a6022474313cc92407c1ad672f60c693a693199cfb5823"
+        "sha256": "8e8e382da4934394c8fddb63fe6f3c90b23b6037ce4f6813ddc688dfad54c38f"
       }
     }
   ]
