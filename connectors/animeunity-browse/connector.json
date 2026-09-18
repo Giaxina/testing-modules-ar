@@ -3,7 +3,7 @@
   "id": "animeunity-browse",
   "familyID": "animeunity-browse",
   "name": "AnimeUnity",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "minimumAppVersion": "0.1.0",
   "contentType": "video",
   "language": "it",
@@ -298,7 +298,7 @@
               "selector": "script:contains(window.downloadUrl)",
               "where": [
                 {
-                  "field": "filemark",
+                  "field": "qualityLabel",
                   "containsPlaceholder": "variant"
                 }
               ]
@@ -321,7 +321,7 @@
                   }
                 ]
               },
-              "filemark": {
+              "qualityLabel": {
                 "selector": "script:contains(window.downloadUrl)",
                 "part": "text",
                 "transforms": [
@@ -344,9 +344,6 @@
                   }
                 ]
               },
-              "qualityLabel": {
-                "literal": "1080p"
-              },
               "mediaTypeHint": {
                 "literal": "mp4"
               }
@@ -356,5 +353,5 @@
       ]
     }
   },
-  "releaseNotes": "0.1.1: fix native-validation rejection — removed details.genres (the JSON path \"genres[*].name\" uses a mid-path [*] wildcard the app rejects; wildcards must be terminal). Title/synopsis/poster/year unchanged."
+  "releaseNotes": "0.1.2: fix native-validation rejection — streams final extract fields are strict (model keys only); the variant marker moved from a custom 'filemark' field onto qualityLabel (free-form model field) via the same SUB_ITA->SUB / ITA->DUB transform chain, and the where filter now tests qualityLabel. Gating semantics unchanged: wrong-variant requests yield no candidate, never a substitution."
 }
