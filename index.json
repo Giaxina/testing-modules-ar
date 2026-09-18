@@ -3,12 +3,12 @@
   "repositoryID": "mio-feed-aroki",
   "name": "Mio Feed AROKI",
   "enabled": true,
-  "generatedAt": 1789769761,
+  "generatedAt": 1789770390,
   "connectors": [
     {
       "familyID": "animeunity-browse",
       "name": "AnimeUnity",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "contentType": "video",
       "language": "it",
       "contentRating": "unknown",
@@ -16,10 +16,10 @@
       "status": "active",
       "minimumAppVersion": "0.1.0",
       "id": "animeunity-browse",
-      "releaseNotes": "0.1.3: streams graph rebuilt on proven engine mechanisms — the bare-text /embed-url step is gone. Now: title page (html-attr-json) -> slug -> composed episode URL /anime/{titleID}-{slug}/{episodeID} -> embed_url attribute -> vixcloud embed page -> direct MP4 with the SUB_ITA/ITA marker gating on qualityLabel. Four-step cap respected (3 steps). Gating semantics unchanged.",
+      "releaseNotes": "0.1.4: revert the streams graph to the two-step form (embed-url -> vixcloud). The app's part:attr validation rejects underscore attribute names, so the episode page's embed_url attribute is unreadable; the slug-trick graph is dropped. Evidence review: the 0.2.2 reports were Sub requests on (ITA) dub-only titles - honest no-candidate results, so the original graph was likely functional. Test with the correct variant per title.",
       "manifest": {
-        "path": "connectors/animeunity-browse/releases/0ad8bc93d374e5faa75b1107f5bb254a694f7d152ade798ae98974a99436787b/connector.json",
-        "sha256": "0ad8bc93d374e5faa75b1107f5bb254a694f7d152ade798ae98974a99436787b"
+        "path": "connectors/animeunity-browse/releases/4ff985344740415f50232c17621261978345650cd7f8b8a7d1f290d3c44cc377/connector.json",
+        "sha256": "4ff985344740415f50232c17621261978345650cd7f8b8a7d1f290d3c44cc377"
       }
     }
   ]
