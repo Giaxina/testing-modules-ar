@@ -3,12 +3,12 @@
   "repositoryID": "mio-feed-aroki",
   "name": "Mio Feed AROKI",
   "enabled": true,
-  "generatedAt": 1789816410,
+  "generatedAt": 1789816641,
   "connectors": [
     {
       "familyID": "animeunity-browse",
       "name": "AnimeUnity",
-      "version": "0.2.8",
+      "version": "0.2.9",
       "contentType": "video",
       "language": "it",
       "contentRating": "unknown",
@@ -16,10 +16,10 @@
       "status": "active",
       "minimumAppVersion": "0.1.0",
       "id": "animeunity-browse",
-      "releaseNotes": "0.1.8 DIAGNOSTIC: step1 final extract replaced with a guaranteed-safe decoy candidate (jwplayer src absolutized, animegg-proven shape, no where filter) to bisect where the chain breaks: if a candidate now appears, step0/follow/parse are good and the script-text extraction is the blocker.",
+      "releaseNotes": "0.1.9 DIAGNOSTIC: url stays on the decoy (candidate always exists) and qualityLabel now carries the VERBATIM output of the real script chain, so the playback report shows exactly what the extraction produces. Fallback literal 'probe-empty' marks an empty chain result.",
       "manifest": {
-        "path": "connectors/animeunity-browse/releases/4e5e052fbca3df0cab0de65b7575f22e21383b56b82d298dd4451dc5f67806bb/connector.json",
-        "sha256": "4e5e052fbca3df0cab0de65b7575f22e21383b56b82d298dd4451dc5f67806bb"
+        "path": "connectors/animeunity-browse/releases/7a93d5f7d8b994e0887f132a96a8ae5cfe36b9151b1ac96055ca4a7dcebf6dec/connector.json",
+        "sha256": "7a93d5f7d8b994e0887f132a96a8ae5cfe36b9151b1ac96055ca4a7dcebf6dec"
       }
     },
     {
