@@ -3,12 +3,12 @@
   "repositoryID": "mio-feed-aroki",
   "name": "Mio Feed AROKI",
   "enabled": true,
-  "generatedAt": 1789815039,
+  "generatedAt": 1789815512,
   "connectors": [
     {
       "familyID": "animeunity-browse",
       "name": "AnimeUnity",
-      "version": "0.2.5",
+      "version": "0.2.6",
       "contentType": "video",
       "language": "it",
       "contentRating": "unknown",
@@ -16,10 +16,10 @@
       "status": "active",
       "minimumAppVersion": "0.1.0",
       "id": "animeunity-browse",
-      "releaseNotes": "0.1.5: declare per-title availableVariants (the app's audio picker only appears when this metadata is present) — mapped from the source's own dub flag (1->dub, 0->sub) via replaceFirst transforms. Each AnimeUnity entry carries one audio variant, so the app now auto-plays the correct one instead of defaulting to Sub on ITA-only titles; the streams marker gating stays as the honest guard.",
+      "releaseNotes": "0.1.6: availableVariants declared in the collection form (the app rejects the scalar path form for this field) — collection 'dub' with replaceFirst 1->dub / 0->sub transforms.",
       "manifest": {
-        "path": "connectors/animeunity-browse/releases/6b18c32c183d4ab0dd08143d565afba29694f6efe08e8159bc788c59e7e2ee15/connector.json",
-        "sha256": "6b18c32c183d4ab0dd08143d565afba29694f6efe08e8159bc788c59e7e2ee15"
+        "path": "connectors/animeunity-browse/releases/7be6de2c890f7c77dfee71a7288aeaa96134f03fd5e649df459abcd1dd3efc82/connector.json",
+        "sha256": "7be6de2c890f7c77dfee71a7288aeaa96134f03fd5e649df459abcd1dd3efc82"
       }
     },
     {
