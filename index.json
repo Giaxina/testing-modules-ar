@@ -3,12 +3,12 @@
   "repositoryID": "mio-feed-aroki",
   "name": "Mio Feed AROKI",
   "enabled": true,
-  "generatedAt": 1789817256,
+  "generatedAt": 1789817379,
   "connectors": [
     {
       "familyID": "animeunity-browse",
       "name": "AnimeUnity",
-      "version": "0.2.10",
+      "version": "0.2.11",
       "contentType": "video",
       "language": "it",
       "contentRating": "unknown",
@@ -16,10 +16,10 @@
       "status": "active",
       "minimumAppVersion": "0.1.0",
       "id": "animeunity-browse",
-      "releaseNotes": "0.1.10: real extraction attempt — url uses script:containsData(window.downloadUrl) + part:text chain (the script-data-aware selector) with the decoy as fallback; qualityLabel keeps the legacy :contains probe to confirm which selector matches script content.",
+      "releaseNotes": "0.1.11: fallback mappings cannot carry transforms (app validator) — the decoy fallback now uses link[href^=https://vixcloud.co] whose href is already absolute (no transform needed).",
       "manifest": {
-        "path": "connectors/animeunity-browse/releases/50c5b8c6bce505814dd31bde825315440a4837b5e3b4efd21c4f4928d0691553/connector.json",
-        "sha256": "50c5b8c6bce505814dd31bde825315440a4837b5e3b4efd21c4f4928d0691553"
+        "path": "connectors/animeunity-browse/releases/f0fee4dc69045053375823576230f7af97429312760e13fecd522ce173f78e72/connector.json",
+        "sha256": "f0fee4dc69045053375823576230f7af97429312760e13fecd522ce173f78e72"
       }
     },
     {
