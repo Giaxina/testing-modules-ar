@@ -3,12 +3,12 @@
   "repositoryID": "mio-feed-aroki",
   "name": "Mio Feed AROKI",
   "enabled": true,
-  "generatedAt": 1789771846,
+  "generatedAt": 1789815039,
   "connectors": [
     {
       "familyID": "animeunity-browse",
       "name": "AnimeUnity",
-      "version": "0.2.4",
+      "version": "0.2.5",
       "contentType": "video",
       "language": "it",
       "contentRating": "unknown",
@@ -16,10 +16,10 @@
       "status": "active",
       "minimumAppVersion": "0.1.0",
       "id": "animeunity-browse",
-      "releaseNotes": "0.1.4: revert the streams graph to the two-step form (embed-url -> vixcloud). The app's part:attr validation rejects underscore attribute names, so the episode page's embed_url attribute is unreadable; the slug-trick graph is dropped. Evidence review: the 0.2.2 reports were Sub requests on (ITA) dub-only titles - honest no-candidate results, so the original graph was likely functional. Test with the correct variant per title.",
+      "releaseNotes": "0.1.5: declare per-title availableVariants (the app's audio picker only appears when this metadata is present) — mapped from the source's own dub flag (1->dub, 0->sub) via replaceFirst transforms. Each AnimeUnity entry carries one audio variant, so the app now auto-plays the correct one instead of defaulting to Sub on ITA-only titles; the streams marker gating stays as the honest guard.",
       "manifest": {
-        "path": "connectors/animeunity-browse/releases/4ff985344740415f50232c17621261978345650cd7f8b8a7d1f290d3c44cc377/connector.json",
-        "sha256": "4ff985344740415f50232c17621261978345650cd7f8b8a7d1f290d3c44cc377"
+        "path": "connectors/animeunity-browse/releases/6b18c32c183d4ab0dd08143d565afba29694f6efe08e8159bc788c59e7e2ee15/connector.json",
+        "sha256": "6b18c32c183d4ab0dd08143d565afba29694f6efe08e8159bc788c59e7e2ee15"
       }
     },
     {
