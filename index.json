@@ -3,12 +3,12 @@
   "repositoryID": "mio-feed-aroki",
   "name": "Mio Feed AROKI",
   "enabled": true,
-  "generatedAt": 1789816641,
+  "generatedAt": 1789817256,
   "connectors": [
     {
       "familyID": "animeunity-browse",
       "name": "AnimeUnity",
-      "version": "0.2.9",
+      "version": "0.2.10",
       "contentType": "video",
       "language": "it",
       "contentRating": "unknown",
@@ -16,10 +16,10 @@
       "status": "active",
       "minimumAppVersion": "0.1.0",
       "id": "animeunity-browse",
-      "releaseNotes": "0.1.9 DIAGNOSTIC: url stays on the decoy (candidate always exists) and qualityLabel now carries the VERBATIM output of the real script chain, so the playback report shows exactly what the extraction produces. Fallback literal 'probe-empty' marks an empty chain result.",
+      "releaseNotes": "0.1.10: real extraction attempt — url uses script:containsData(window.downloadUrl) + part:text chain (the script-data-aware selector) with the decoy as fallback; qualityLabel keeps the legacy :contains probe to confirm which selector matches script content.",
       "manifest": {
-        "path": "connectors/animeunity-browse/releases/7a93d5f7d8b994e0887f132a96a8ae5cfe36b9151b1ac96055ca4a7dcebf6dec/connector.json",
-        "sha256": "7a93d5f7d8b994e0887f132a96a8ae5cfe36b9151b1ac96055ca4a7dcebf6dec"
+        "path": "connectors/animeunity-browse/releases/50c5b8c6bce505814dd31bde825315440a4837b5e3b4efd21c4f4928d0691553/connector.json",
+        "sha256": "50c5b8c6bce505814dd31bde825315440a4837b5e3b4efd21c4f4928d0691553"
       }
     },
     {
