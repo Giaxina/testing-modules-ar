@@ -3,23 +3,23 @@
   "repositoryID": "mio-feed-aroki",
   "name": "Mio Feed AROKI",
   "enabled": true,
-  "generatedAt": 1789817379,
+  "generatedAt": 1789818511,
   "connectors": [
     {
       "familyID": "animeunity-browse",
       "name": "AnimeUnity",
-      "version": "0.2.11",
+      "version": "0.2.12",
       "contentType": "video",
       "language": "it",
       "contentRating": "unknown",
       "releaseTrack": "beta",
       "status": "active",
-      "minimumAppVersion": "0.1.0",
+      "minimumAppVersion": "2.0.36",
       "id": "animeunity-browse",
-      "releaseNotes": "0.1.11: fallback mappings cannot carry transforms (app validator) — the decoy fallback now uses link[href^=https://vixcloud.co] whose href is already absolute (no transform needed).",
+      "releaseNotes": "0.2.12: streams rebuilt on the literal-selection route (maintainer-piloted on this site): bare-text /embed-url -> vixcloud embed page -> window.masterPlaylist assignment (token/expires) + window.streams assignment (HLS candidates) with token/expires/h=1/lang=it appended - the pilot's HTTP 403 was the missing h=1 param. Requires Aroki 2.0.36+ (line-literal-assignment-v1, encoded-query-v1). Two server candidates; device playback not yet verified.",
       "manifest": {
-        "path": "connectors/animeunity-browse/releases/f0fee4dc69045053375823576230f7af97429312760e13fecd522ce173f78e72/connector.json",
-        "sha256": "f0fee4dc69045053375823576230f7af97429312760e13fecd522ce173f78e72"
+        "path": "connectors/animeunity-browse/releases/5d17bfd03faba0cdc0cd998df40cd6a6e054ff0622d4fd9fdd4bf835c0fd7e53/connector.json",
+        "sha256": "5d17bfd03faba0cdc0cd998df40cd6a6e054ff0622d4fd9fdd4bf835c0fd7e53"
       }
     },
     {
