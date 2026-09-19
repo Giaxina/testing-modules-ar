@@ -3,12 +3,12 @@
   "repositoryID": "mio-feed-aroki",
   "name": "Mio Feed AROKI",
   "enabled": true,
-  "generatedAt": 1789815512,
+  "generatedAt": 1789815812,
   "connectors": [
     {
       "familyID": "animeunity-browse",
       "name": "AnimeUnity",
-      "version": "0.2.6",
+      "version": "0.2.7",
       "contentType": "video",
       "language": "it",
       "contentRating": "unknown",
@@ -16,10 +16,10 @@
       "status": "active",
       "minimumAppVersion": "0.1.0",
       "id": "animeunity-browse",
-      "releaseNotes": "0.1.6: availableVariants declared in the collection form (the app rejects the scalar path form for this field) — collection 'dub' with replaceFirst 1->dub / 0->sub transforms.",
+      "releaseNotes": "0.1.7: availableVariants collection path changed to dub[*] (the app requires a [*]-terminated JSON path; wildcard-on-scalar is the remaining declarative form for the source's dub flag).",
       "manifest": {
-        "path": "connectors/animeunity-browse/releases/7be6de2c890f7c77dfee71a7288aeaa96134f03fd5e649df459abcd1dd3efc82/connector.json",
-        "sha256": "7be6de2c890f7c77dfee71a7288aeaa96134f03fd5e649df459abcd1dd3efc82"
+        "path": "connectors/animeunity-browse/releases/7e9129e40bc73c50f565468f68a0d4444030e1c34aa43009779549c9347977fa/connector.json",
+        "sha256": "7e9129e40bc73c50f565468f68a0d4444030e1c34aa43009779549c9347977fa"
       }
     },
     {
