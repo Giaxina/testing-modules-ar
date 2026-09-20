@@ -3,12 +3,12 @@
   "repositoryID": "mio-feed-aroki",
   "name": "Mio Feed AROKI",
   "enabled": true,
-  "generatedAt": 1789919620,
+  "generatedAt": 1789921940,
   "connectors": [
     {
       "familyID": "animeunity-browse",
       "name": "AnimeUnity",
-      "version": "0.2.13",
+      "version": "0.2.14",
       "contentType": "video",
       "language": "it",
       "contentRating": "unknown",
@@ -16,10 +16,10 @@
       "status": "active",
       "minimumAppVersion": "2.0.36",
       "id": "animeunity-browse",
-      "releaseNotes": "0.2.13: 'Archivio' (All) discovery now pages via the site's own catalogue endpoint (POST /archivio/get-animes, limit/offset, up to 25 pages) with the public source session (CSRF+cookie bootstrap) - fixes the section stopping after the first 30 titles while scrolling. Added the remaining poster CDN hosts. Streams unchanged from 0.2.12 (literal-selection HLS graph).",
+      "releaseNotes": "0.2.14: streams fully variant-gated again (script read of window.downloadUrl + SUB_ITA/ITA marker chain + {variant} where-filter): a Sub request can never be served the Italian audio and vice versa. The 0.2.12/0.2.13 HLS route played but could not separate the two audios (the app resolves sub and dub for every title), which is why (ITA) titles still played Italian under Sub. Script-text extraction pending on-device verification.",
       "manifest": {
-        "path": "connectors/animeunity-browse/releases/1c1ff236d7a4db3f4289b410cc338c81ef544b713c3591a6faf3a4688fd97947/connector.json",
-        "sha256": "1c1ff236d7a4db3f4289b410cc338c81ef544b713c3591a6faf3a4688fd97947"
+        "path": "connectors/animeunity-browse/releases/14e885c506d26b107c91c18bbdb2d7e882af82ce4dacd7b9274d8b237b271ad4/connector.json",
+        "sha256": "14e885c506d26b107c91c18bbdb2d7e882af82ce4dacd7b9274d8b237b271ad4"
       }
     },
     {
