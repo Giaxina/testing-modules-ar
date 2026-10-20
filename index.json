@@ -3,12 +3,12 @@
   "repositoryID": "mio-feed-aroki",
   "name": "Mio Feed AROKI",
   "enabled": true,
-  "generatedAt": 1789922082,
+  "generatedAt": 1792518201,
   "connectors": [
     {
       "familyID": "animeunity-browse",
       "name": "AnimeUnity",
-      "version": "0.2.15",
+      "version": "0.3.0",
       "contentType": "video",
       "language": "it",
       "contentRating": "unknown",
@@ -16,10 +16,10 @@
       "status": "active",
       "minimumAppVersion": "2.0.36",
       "id": "animeunity-browse",
-      "releaseNotes": "0.2.15: rollback to the 0.2.13 streams route (HLS via literal-selection) on owner request - the 0.2.14 variant-gated experiment is withdrawn. Behavior identical to 0.2.13: streams play; per-title audio follows the dub flag; no sub/dub candidate filtering.",
+      "releaseNotes": "0.3.0: migrated to the new site animeunity.at (animeunity.so is down). New server-side source: discovery from the home feed and /filter catalogue, search via /filter?keyword=, details from the title page, episodes from /ajax/episode/list, streams resolved through the server link-id chain (/ajax/server -> /embed/source -> HLS). Stream candidates are gated by the site's own sub/dub server type, so a variant only resolves when the source actually offers it.",
       "manifest": {
-        "path": "connectors/animeunity-browse/releases/ed1a4bb096f6f184ad82df9032a0876f56c4df322e1aa77cfb57365b5d2a9a27/connector.json",
-        "sha256": "ed1a4bb096f6f184ad82df9032a0876f56c4df322e1aa77cfb57365b5d2a9a27"
+        "path": "connectors/animeunity-browse/releases/c3c116a3dbea0473b4316fcab39396850451f979664dcb453fceb05af123d579/connector.json",
+        "sha256": "c3c116a3dbea0473b4316fcab39396850451f979664dcb453fceb05af123d579"
       }
     },
     {
