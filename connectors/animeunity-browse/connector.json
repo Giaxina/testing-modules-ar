@@ -3,7 +3,7 @@
   "id": "animeunity-browse",
   "familyID": "animeunity-browse",
   "name": "AnimeUnity",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "minimumAppVersion": "2.0.36",
   "contentType": "video",
   "language": "it",
@@ -38,7 +38,7 @@
   ],
   "limits": {
     "timeoutMilliseconds": 20000,
-    "maxConcurrentRequests": 2,
+    "maxConcurrentRequests": 1,
     "maxResponseBytes": 4194304
   },
   "operations": {
@@ -53,7 +53,8 @@
             "urlTemplate": "https://www.animeunity.at/?page={page}",
             "headers": {
               "Accept": "text/html",
-              "Referer": "https://www.animeunity.at/"
+              "Referer": "https://www.animeunity.at/",
+              "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1"
             }
           },
           "response": {
@@ -117,7 +118,8 @@
             "urlTemplate": "https://www.animeunity.at/filter?page={page}",
             "headers": {
               "Accept": "text/html",
-              "Referer": "https://www.animeunity.at/"
+              "Referer": "https://www.animeunity.at/",
+              "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1"
             }
           },
           "response": {
@@ -166,7 +168,8 @@
         "urlTemplate": "https://www.animeunity.at/filter?keyword={query}&page={page}",
         "headers": {
           "Accept": "text/html",
-          "Referer": "https://www.animeunity.at/"
+          "Referer": "https://www.animeunity.at/",
+          "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1"
         }
       },
       "response": {
@@ -213,7 +216,8 @@
         "urlTemplate": "https://www.animeunity.at/anime/{titleID}-0",
         "headers": {
           "Accept": "text/html",
-          "Referer": "https://www.animeunity.at/"
+          "Referer": "https://www.animeunity.at/",
+          "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1"
         }
       },
       "response": {
@@ -278,7 +282,8 @@
         "urlTemplate": "https://www.animeunity.at/ajax/episode/list/{titleID}",
         "headers": {
           "Accept": "application/json",
-          "Referer": "https://www.animeunity.at/"
+          "Referer": "https://www.animeunity.at/",
+          "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1"
         }
       },
       "response": {
@@ -338,7 +343,8 @@
             "urlTemplate": "https://www.animeunity.at/anime/{titleID}-0/ep-{episodeID}",
             "headers": {
               "Accept": "text/html",
-              "Referer": "https://www.animeunity.at/"
+              "Referer": "https://www.animeunity.at/",
+              "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1"
             }
           },
           "response": {
@@ -360,7 +366,8 @@
             "urlTemplate": "https://www.animeunity.at/ajax/server?get={linkID}",
             "headers": {
               "Accept": "application/json",
-              "Referer": "https://www.animeunity.at/"
+              "Referer": "https://www.animeunity.at/",
+              "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1"
             }
           },
           "response": {
@@ -380,7 +387,8 @@
             "method": "GET",
             "follow": "embed",
             "headers": {
-              "Referer": "https://www.animeunity.at/"
+              "Referer": "https://www.animeunity.at/",
+              "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1"
             }
           },
           "response": {
@@ -408,7 +416,8 @@
             "method": "GET",
             "follow": "embed",
             "headers": {
-              "Referer": "https://www.animeunity.at/"
+              "Referer": "https://www.animeunity.at/",
+              "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1"
             }
           },
           "response": {
@@ -448,7 +457,7 @@
       ]
     }
   },
-  "releaseNotes": "0.3.2: the site returns HTTP 500 when a request carries X-Requested-With - removed from the episodes request and the server-resolution step (Accept: application/json alone is enough). Fixes playback failing for both variants. 0.3.1: html field mappings need a selector. 0.3.0: migration to animeunity.at.",
+  "releaseNotes": "0.3.3: the site's WAF answers 500 to non-browser user agents and its /ajax throttle is tight, while the app resolves both audio variants per title. All requests now send an iPhone Safari User-Agent and run with maxConcurrentRequests=1 (serial, no bursts) so the resolver (graph#2) stops returning 429. 0.3.2: X-Requested-With removed. 0.3.1: episode fields need selectors. 0.3.0: animeunity.at migration.",
   "requiredEngineFeatures": [
     "line-literal-assignment-v1",
     "encoded-query-v1"

@@ -3,12 +3,12 @@
   "repositoryID": "mio-feed-aroki",
   "name": "Mio Feed AROKI",
   "enabled": true,
-  "generatedAt": 1792519469,
+  "generatedAt": 1792519821,
   "connectors": [
     {
       "familyID": "animeunity-browse",
       "name": "AnimeUnity",
-      "version": "0.3.2",
+      "version": "0.3.3",
       "contentType": "video",
       "language": "it",
       "contentRating": "unknown",
@@ -16,10 +16,10 @@
       "status": "active",
       "minimumAppVersion": "2.0.36",
       "id": "animeunity-browse",
-      "releaseNotes": "0.3.2: the site returns HTTP 500 when a request carries X-Requested-With - removed from the episodes request and the server-resolution step (Accept: application/json alone is enough). Fixes playback failing for both variants. 0.3.1: html field mappings need a selector. 0.3.0: migration to animeunity.at.",
+      "releaseNotes": "0.3.3: the site's WAF answers 500 to non-browser user agents and its /ajax throttle is tight, while the app resolves both audio variants per title. All requests now send an iPhone Safari User-Agent and run with maxConcurrentRequests=1 (serial, no bursts) so the resolver (graph#2) stops returning 429. 0.3.2: X-Requested-With removed. 0.3.1: episode fields need selectors. 0.3.0: animeunity.at migration.",
       "manifest": {
-        "path": "connectors/animeunity-browse/releases/390773fac47e0329ba823f486e162bbc36935928ffa1abe65b6ac2eae855d275/connector.json",
-        "sha256": "390773fac47e0329ba823f486e162bbc36935928ffa1abe65b6ac2eae855d275"
+        "path": "connectors/animeunity-browse/releases/614ead904577f715656a82cfb342f7efd8ecc99ae0c2d869168a5441ac8571ff/connector.json",
+        "sha256": "614ead904577f715656a82cfb342f7efd8ecc99ae0c2d869168a5441ac8571ff"
       }
     },
     {
