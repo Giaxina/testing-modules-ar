@@ -3,12 +3,12 @@
   "repositoryID": "mio-feed-aroki",
   "name": "Mio Feed AROKI",
   "enabled": true,
-  "generatedAt": 1792518201,
+  "generatedAt": 1792518636,
   "connectors": [
     {
       "familyID": "animeunity-browse",
       "name": "AnimeUnity",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "contentType": "video",
       "language": "it",
       "contentRating": "unknown",
@@ -16,10 +16,10 @@
       "status": "active",
       "minimumAppVersion": "2.0.36",
       "id": "animeunity-browse",
-      "releaseNotes": "0.3.0: migrated to the new site animeunity.at (animeunity.so is down). New server-side source: discovery from the home feed and /filter catalogue, search via /filter?keyword=, details from the title page, episodes from /ajax/episode/list, streams resolved through the server link-id chain (/ajax/server -> /embed/source -> HLS). Stream candidates are gated by the site's own sub/dub server type, so a variant only resolves when the source actually offers it.",
+      "releaseNotes": "0.3.1: fix episodes extract for the app validator - every html field mapping needs a selector; collection is now li.episode with fields read from the inner a[data-id] anchor. 0.3.0: migration to animeunity.at (animeunity.so is down): home + /filter catalogue, search via /filter?keyword=, details from the title page, episodes via /ajax/episode/list, streams through server link-id (/ajax/server -> /embed/source -> HLS), variant-gated by the site's own sub/dub server type.",
       "manifest": {
-        "path": "connectors/animeunity-browse/releases/c3c116a3dbea0473b4316fcab39396850451f979664dcb453fceb05af123d579/connector.json",
-        "sha256": "c3c116a3dbea0473b4316fcab39396850451f979664dcb453fceb05af123d579"
+        "path": "connectors/animeunity-browse/releases/0addff4a8cf697de7bd2110c0eac6f52e4283659172657896f12449906520210/connector.json",
+        "sha256": "0addff4a8cf697de7bd2110c0eac6f52e4283659172657896f12449906520210"
       }
     },
     {

@@ -1,0 +1,458 @@
+{
+  "schemaVersion": 1,
+  "id": "animeunity-browse",
+  "familyID": "animeunity-browse",
+  "name": "AnimeUnity",
+  "version": "0.3.1",
+  "minimumAppVersion": "2.0.36",
+  "contentType": "video",
+  "language": "it",
+  "contentRating": "unknown",
+  "releaseTrack": "beta",
+  "status": "active",
+  "attribution": {
+    "author": "Community candidate (unverified)",
+    "website": "https://www.animeunity.at"
+  },
+  "authorization": {
+    "basis": "personal",
+    "note": "Candidato di test non verificato: lo stato dei diritti dei contenuti non è stato accertato. Usare solo contenuti a cui si ha diritto di accesso; nessun diritto di distribuzione è fornito. Non pubblicare senza verifica del maintainer.",
+    "evidenceURL": "https://www.animeunity.at/"
+  },
+  "allowedHosts": [
+    "www.animeunity.at",
+    "animeunity.at",
+    "vixcloud.co",
+    "*.vix-content.net",
+    "*.anilist.co",
+    "*.myanimelist.net",
+    "image.tmdb.org",
+    "cdn.anipixcdn.co"
+  ],
+  "capabilities": [
+    "discovery",
+    "search",
+    "details",
+    "episodes",
+    "streams"
+  ],
+  "limits": {
+    "timeoutMilliseconds": 20000,
+    "maxConcurrentRequests": 2,
+    "maxResponseBytes": 4194304
+  },
+  "operations": {
+    "discovery": {
+      "sections": [
+        {
+          "id": "latest",
+          "title": "Ultimi episodi",
+          "semantic": "recent",
+          "request": {
+            "method": "GET",
+            "urlTemplate": "https://www.animeunity.at/?page={page}",
+            "headers": {
+              "Accept": "text/html",
+              "Referer": "https://www.animeunity.at/"
+            }
+          },
+          "response": {
+            "format": "html"
+          },
+          "pagination": {
+            "type": "pageParam",
+            "start": 1,
+            "maxPages": 8
+          },
+          "items": {
+            "collection": "#ultimi-episodi div.item",
+            "fields": {
+              "sourceID": {
+                "selector": "a.cover",
+                "part": "attr",
+                "attr": "href",
+                "transforms": [
+                  {
+                    "op": "firstInteger"
+                  }
+                ]
+              },
+              "title": {
+                "selector": "div.title span.title",
+                "part": "text",
+                "transforms": [
+                  {
+                    "op": "trim"
+                  }
+                ]
+              },
+              "posterURL": {
+                "selector": "div.image",
+                "part": "attr",
+                "attr": "style",
+                "transforms": [
+                  {
+                    "op": "removePrefix",
+                    "value": "background-image: url(\""
+                  },
+                  {
+                    "op": "removeSuffix",
+                    "value": ";"
+                  },
+                  {
+                    "op": "removeSuffix",
+                    "value": "\")"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "archive",
+          "title": "Catalogo",
+          "semantic": "all",
+          "request": {
+            "method": "GET",
+            "urlTemplate": "https://www.animeunity.at/filter?page={page}",
+            "headers": {
+              "Accept": "text/html",
+              "Referer": "https://www.animeunity.at/"
+            }
+          },
+          "response": {
+            "format": "html"
+          },
+          "pagination": {
+            "type": "pageParam",
+            "start": 1,
+            "maxPages": 25
+          },
+          "items": {
+            "collection": "#anime-wrapper div.anime-item",
+            "fields": {
+              "sourceID": {
+                "selector": "a.overlay-wrapper",
+                "part": "attr",
+                "attr": "href",
+                "transforms": [
+                  {
+                    "op": "firstInteger"
+                  }
+                ]
+              },
+              "title": {
+                "selector": "strong.title",
+                "part": "text",
+                "transforms": [
+                  {
+                    "op": "trim"
+                  }
+                ]
+              },
+              "posterURL": {
+                "selector": "img",
+                "part": "attr",
+                "attr": "src"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "search": {
+      "request": {
+        "method": "GET",
+        "urlTemplate": "https://www.animeunity.at/filter?keyword={query}&page={page}",
+        "headers": {
+          "Accept": "text/html",
+          "Referer": "https://www.animeunity.at/"
+        }
+      },
+      "response": {
+        "format": "html"
+      },
+      "pagination": {
+        "type": "pageParam",
+        "start": 1,
+        "maxPages": 10
+      },
+      "items": {
+        "collection": "#anime-wrapper div.anime-item",
+        "fields": {
+          "sourceID": {
+            "selector": "a.overlay-wrapper",
+            "part": "attr",
+            "attr": "href",
+            "transforms": [
+              {
+                "op": "firstInteger"
+              }
+            ]
+          },
+          "title": {
+            "selector": "strong.title",
+            "part": "text",
+            "transforms": [
+              {
+                "op": "trim"
+              }
+            ]
+          },
+          "posterURL": {
+            "selector": "img",
+            "part": "attr",
+            "attr": "src"
+          }
+        }
+      }
+    },
+    "details": {
+      "request": {
+        "method": "GET",
+        "urlTemplate": "https://www.animeunity.at/anime/{titleID}-0",
+        "headers": {
+          "Accept": "text/html",
+          "Referer": "https://www.animeunity.at/"
+        }
+      },
+      "response": {
+        "format": "html"
+      },
+      "extract": {
+        "title": {
+          "selector": "h1.title.d-title",
+          "part": "text",
+          "transforms": [
+            {
+              "op": "trim"
+            }
+          ]
+        },
+        "synopsis": {
+          "selector": "div.general div.description",
+          "part": "text",
+          "transforms": [
+            {
+              "op": "trim"
+            }
+          ]
+        },
+        "posterURL": {
+          "selector": "meta[property=\"og:image\"]",
+          "part": "attr",
+          "attr": "content"
+        },
+        "year": {
+          "selector": "div.info-item:has(strong:contains(Anno)) small",
+          "part": "text",
+          "transforms": [
+            {
+              "op": "firstInteger"
+            }
+          ]
+        },
+        "availableVariants": {
+          "collection": "#w-servers .au-srv-lang",
+          "transforms": [
+            {
+              "op": "lowercased"
+            },
+            {
+              "op": "replaceFirst",
+              "find": "sub ita",
+              "with": "sub"
+            },
+            {
+              "op": "replaceFirst",
+              "find": "ita",
+              "with": "dub"
+            }
+          ]
+        }
+      }
+    },
+    "episodes": {
+      "request": {
+        "method": "GET",
+        "urlTemplate": "https://www.animeunity.at/ajax/episode/list/{titleID}",
+        "headers": {
+          "Accept": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+          "Referer": "https://www.animeunity.at/"
+        }
+      },
+      "response": {
+        "format": "json-wrapped-html",
+        "unwrapPath": "result"
+      },
+      "extract": {
+        "collection": "li.episode",
+        "fields": {
+          "episodeID": {
+            "selector": "a",
+            "part": "attr",
+            "attr": "data-id",
+            "transforms": [
+              {
+                "op": "trim"
+              }
+            ]
+          },
+          "title": {
+            "selector": "a",
+            "part": "attr",
+            "attr": "title",
+            "transforms": [
+              {
+                "op": "trim"
+              }
+            ]
+          },
+          "episodeNumber": {
+            "selector": "a",
+            "part": "attr",
+            "attr": "data-num",
+            "transforms": [
+              {
+                "op": "firstInteger"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "streams": {
+      "variants": [
+        "sub",
+        "dub"
+      ],
+      "playbackHeaders": {
+        "Referer": "https://vixcloud.co/",
+        "Origin": "https://vixcloud.co"
+      },
+      "finalMediaPolicy": "public-https",
+      "steps": [
+        {
+          "request": {
+            "method": "GET",
+            "urlTemplate": "https://www.animeunity.at/anime/{titleID}-0/ep-{episodeID}",
+            "headers": {
+              "Accept": "text/html",
+              "Referer": "https://www.animeunity.at/"
+            }
+          },
+          "response": {
+            "format": "html"
+          },
+          "extract": {
+            "context": {
+              "linkID": {
+                "selector": "li[data-type=\"{variant}\"][data-sv-id=\"vixcloud\"][data-link-id]",
+                "part": "attr",
+                "attr": "data-link-id"
+              }
+            }
+          }
+        },
+        {
+          "request": {
+            "method": "GET",
+            "urlTemplate": "https://www.animeunity.at/ajax/server?get={linkID}",
+            "headers": {
+              "Accept": "application/json",
+              "X-Requested-With": "XMLHttpRequest",
+              "Referer": "https://www.animeunity.at/"
+            }
+          },
+          "response": {
+            "format": "json"
+          },
+          "extract": {
+            "context": {
+              "embed": {
+                "kind": "url",
+                "path": "result.url"
+              }
+            }
+          }
+        },
+        {
+          "request": {
+            "method": "GET",
+            "follow": "embed",
+            "headers": {
+              "Referer": "https://www.animeunity.at/"
+            }
+          },
+          "response": {
+            "format": "literal-selection",
+            "scriptSelector": "script:containsData(window.masterPlaylist)",
+            "selection": {
+              "kind": "assignment",
+              "name": "window.masterPlaylist",
+              "lineTerminatedAssignment": true
+            }
+          },
+          "extract": {
+            "context": {
+              "token": {
+                "path": "value.params.token"
+              },
+              "expires": {
+                "path": "value.params.expires"
+              }
+            }
+          }
+        },
+        {
+          "request": {
+            "method": "GET",
+            "follow": "embed",
+            "headers": {
+              "Referer": "https://www.animeunity.at/"
+            }
+          },
+          "response": {
+            "format": "literal-selection",
+            "scriptSelector": "script:containsData(window.streams)",
+            "selection": {
+              "kind": "assignment",
+              "name": "window.streams"
+            }
+          },
+          "extract": {
+            "collection": "value[*]",
+            "fields": {
+              "url": {
+                "path": "url",
+                "transforms": [
+                  {
+                    "op": "appendQuery",
+                    "items": {
+                      "token": "{token}",
+                      "expires": "{expires}",
+                      "h": "1",
+                      "lang": "it"
+                    }
+                  }
+                ]
+              },
+              "qualityLabel": {
+                "path": "name"
+              },
+              "mediaTypeHint": {
+                "literal": "hls"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "releaseNotes": "0.3.1: fix episodes extract for the app validator - every html field mapping needs a selector; collection is now li.episode with fields read from the inner a[data-id] anchor. 0.3.0: migration to animeunity.at (animeunity.so is down): home + /filter catalogue, search via /filter?keyword=, details from the title page, episodes via /ajax/episode/list, streams through server link-id (/ajax/server -> /embed/source -> HLS), variant-gated by the site's own sub/dub server type.",
+  "requiredEngineFeatures": [
+    "line-literal-assignment-v1",
+    "encoded-query-v1"
+  ]
+}

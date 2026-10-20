@@ -3,7 +3,7 @@
   "id": "animeunity-browse",
   "familyID": "animeunity-browse",
   "name": "AnimeUnity",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "minimumAppVersion": "2.0.36",
   "contentType": "video",
   "language": "it",
@@ -287,9 +287,10 @@
         "unwrapPath": "result"
       },
       "extract": {
-        "collection": "li.episode a[data-id][data-num]",
+        "collection": "li.episode",
         "fields": {
           "episodeID": {
+            "selector": "a",
             "part": "attr",
             "attr": "data-id",
             "transforms": [
@@ -299,6 +300,7 @@
             ]
           },
           "title": {
+            "selector": "a",
             "part": "attr",
             "attr": "title",
             "transforms": [
@@ -308,6 +310,7 @@
             ]
           },
           "episodeNumber": {
+            "selector": "a",
             "part": "attr",
             "attr": "data-num",
             "transforms": [
@@ -447,7 +450,7 @@
       ]
     }
   },
-  "releaseNotes": "0.3.0: migrated to the new site animeunity.at (animeunity.so is down). New server-side source: discovery from the home feed and /filter catalogue, search via /filter?keyword=, details from the title page, episodes from /ajax/episode/list, streams resolved through the server link-id chain (/ajax/server -> /embed/source -> HLS). Stream candidates are gated by the site's own sub/dub server type, so a variant only resolves when the source actually offers it.",
+  "releaseNotes": "0.3.1: fix episodes extract for the app validator - every html field mapping needs a selector; collection is now li.episode with fields read from the inner a[data-id] anchor. 0.3.0: migration to animeunity.at (animeunity.so is down): home + /filter catalogue, search via /filter?keyword=, details from the title page, episodes via /ajax/episode/list, streams through server link-id (/ajax/server -> /embed/source -> HLS), variant-gated by the site's own sub/dub server type.",
   "requiredEngineFeatures": [
     "line-literal-assignment-v1",
     "encoded-query-v1"
